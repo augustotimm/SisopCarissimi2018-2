@@ -20,4 +20,6 @@ struct t2fs_record* findRecordOfPath();
 //upperDirectoryInode should be first used with -1
 void getPathToDirectory(struct t2fs_record* directory, char* completePath, int upperDirectoryInode);
 
+char* getFilePath(char* filename, char* nameOfFile);
+
 #endif

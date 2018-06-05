@@ -27,8 +27,6 @@ t_control* initializeLibrary() {
 
     bool errorCode;
 
-    struct t2fs_record* record;
-
     errorCode = bootFileSystemController();
     if(errorCode == ERROR)
         return NULL;
@@ -39,15 +37,29 @@ t_control* initializeLibrary() {
 
     initializeBeingWorkedBlock(controller);
     printDirectoryTree(0, 0);
-    getInodeToBeingWorkedInode(0);
-    record = inodeDataPointerGetFirstRecord(beingWorkedInode->dataPtr[0]);
 
-    *rootDirectory = *record;
-    *currentDirectory = *record;
+    getInodeToBeingWorkedInode(0);
+
+
+    struct t2fs_record* records = inodeDataPointerToRecords(beingWorkedInode->dataPtr[0] );
+    getInodeToBeingWorkedInode(1);
+    struct t2fs_record* records2 = inodeDataPointerToRecords(beingWorkedInode->dataPtr[0]);
+    getInodeToBeingWorkedInode(2);
+    struct t2fs_record* records3 = inodeDataPointerToRecords(beingWorkedInode->dataPtr[0]);
+
+    printRecords(records);
+    printf("\ninode1\n");
+    printRecords(records2);
+    printf("\ninode2\n");
+    printRecords(records3);
+
+
+    *rootDirectory = *records;
+    *currentDirectory = *records;
 
     bool status = relativePathExists("./dir2/dir3/aaaaaadsadasdsadasdsadaa", rootDirectory);
-    if(status)
-        printf("found it!!!!!");
+  //  if(status)
+    //    printf("found it!!!!!");
 
     struct t2fs_record* status2 = findRecordOfPath("/dir1/dir12/");
     if(status2)
@@ -58,7 +70,7 @@ t_control* initializeLibrary() {
         printf("found it!!!!!");
 
     getInodeToBeingWorkedInode(5);
-    record = inodeDataPointerGetFirstRecord(beingWorkedInode->dataPtr[0]);
+    struct t2fs_record* record = inodeDataPointerGetFirstRecord(beingWorkedInode->dataPtr[0]);
 
     return controller;
 }

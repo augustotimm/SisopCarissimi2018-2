@@ -184,4 +184,41 @@ void getPathToDirectory(struct t2fs_record* directory, char* completePath, int u
 
 }
 
+char* getFilePath(char* filename, char* nameOfFile){
+
+    char* filenameString = strdup(filename);
+    char* token = (char*) calloc(strlen(filename), sizeof(char));
+    token = strtok(filenameString ,"/");
+    char* pathname =(char*) calloc(strlen(filename), sizeof(char));
+    strcat(pathname,"/");
+    int repeatedName = 0;
+
+
+
+
+    while(token != NULL){
+        //printf("%s\n",token);
+        if(repeatedName >0){
+            strcat(pathname,nameOfFile);
+            strcat(pathname,"/");
+            repeatedName =0;
+            }
+        if(strcmp(nameOfFile,token)!=0){
+            strcat(pathname,token);
+            strcat(pathname,"/");
+        }
+        else{
+            repeatedName ++;
+        }
+
+
+        token = strtok(NULL,"/");
+    }
+    free(token);
+    free(filenameString);
+
+     return pathname;
+
+}
+
 

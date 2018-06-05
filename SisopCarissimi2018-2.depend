@@ -256,3 +256,90 @@
 	<string.h>
 	<stdbool.h>
 
+1528041425 source:/home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/src/blockhandler.c
+	"../include/t2fs.h"
+	"../include/apidisk.h"
+	"../include/bitmap2.h"
+	"../include/initializer.h"
+	"../include/blockhandler.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+
+1528041425 /home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/include/t2fs.h
+	<stdbool.h>
+	"../include/apidisk.h"
+	"../include/bitmap2.h"
+
+1528041425 /home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/include/apidisk.h
+
+1528041425 /home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/include/bitmap2.h
+
+1528041425 /home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/include/initializer.h
+	<stdbool.h>
+	"t2fs.h"
+
+1528041425 /home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/include/blockhandler.h
+	<stdbool.h>
+	"t2fs.h"
+	"initializer.h"
+
+1528080088 source:/home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/src/directory.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	"../include/inodehandler.h"
+	"../include/blockhandler.h"
+	"../include/directory.h"
+	"../include/stringfunctions.h"
+
+1528041425 /home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/include/inodehandler.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	"t2fs.h"
+
+1528200821 /home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/include/directory.h
+	<stdbool.h>
+	"t2fs.h"
+
+1528041425 /home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/include/stringfunctions.h
+
+1528202350 source:/home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/src/initializer.c
+	"../include/t2fs.h"
+	"../include/apidisk.h"
+	"../include/bitmap2.h"
+	"../include/initializer.h"
+	"../include/directory.h"
+	"../include/inodehandler.h"
+	"../include/blockhandler.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+
+1528041425 source:/home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/src/inodehandler.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	"../include/t2fs.h"
+	"../include/inodehandler.h"
+	"../include/blockhandler.h"
+
+1528041425 source:/home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/src/stringfunctions.c
+	<string.h>
+
+1528201180 source:/home/aluno/Desktop/Sisop-2/SisopCarissimi2018-2/src/t2fs.c
+	"../include/t2fs.h"
+	"../include/initializer.h"
+	"../include/directory.h"
+	"../include/inodehandler.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+

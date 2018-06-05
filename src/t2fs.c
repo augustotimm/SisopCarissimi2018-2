@@ -155,7 +155,53 @@ FILE2 open2 (char *filename) {
 
     //cria uma nova entrada para a pra estrutura openedFiles VER HEADER
 
-    return SUCCESS;
+
+    /** TODO TESTAR! **/
+    char* nameOfFile = strrchr(filename,'/');
+    nameOfFile++; //remove '/'
+
+
+
+    char* pathname;
+
+    pathname = getFilePath(filename,(nameOfFile));
+
+
+
+
+    struct t2fs_record* pathRecord;
+    pathRecord= findRecordOfPath(pathname);
+
+    struct t2fs_inode* oldInode = beingWorkedInode;
+
+    getInodeToBeingWorkedInode(pathRecord->inodeNumber);
+
+
+    struct t2fs_record* recordsOfDir;
+    recordsOfDir = inodeDataPointerToRecords(beingWorkedInode->dataPtr[0]);
+
+    //beingWorkedInode = oldInode; //devolve volta o being worked inode para o anterior
+
+    //printf("\n***dir of file:***\n");
+
+    printRecords(recordsOfDir);
+
+    struct openFile* newFile = malloc(sizeof(t_openFile));
+
+    int index = 0;
+    while(strcmp(recordsOfDir[index].name, nameOfFile) !=0 && index < 16){
+        index ++;
+    }
+    if(index >=16){
+        return ERROR;
+    }
+    else{
+        newFile->fileRecord = &(recordsOfDir[index]);
+    }
+
+    free(nameOfFile-1); //free memory with '/'
+
+
 }
 
 
