@@ -157,12 +157,16 @@ FILE2 open2 (char *filename) {
 
 
     /** TODO TESTAR! **/
+
+    int index ;
+    int recordPos;
+
+
+
     char* nameOfFile = strrchr(filename,'/');
     nameOfFile++; //remove '/'
-
-
-
     char* pathname;
+    int emptySpace;
 
     pathname = getFilePath(filename,(nameOfFile));
 
@@ -172,7 +176,6 @@ FILE2 open2 (char *filename) {
     struct t2fs_record* pathRecord;
     pathRecord= findRecordOfPath(pathname);
 
-    struct t2fs_inode* oldInode = beingWorkedInode;
 
     getInodeToBeingWorkedInode(pathRecord->inodeNumber);
 
@@ -180,26 +183,46 @@ FILE2 open2 (char *filename) {
     struct t2fs_record* recordsOfDir;
     recordsOfDir = inodeDataPointerToRecords(beingWorkedInode->dataPtr[0]);
 
-    //beingWorkedInode = oldInode; //devolve volta o being worked inode para o anterior
-
-    //printf("\n***dir of file:***\n");
-
-    printRecords(recordsOfDir);
 
     struct openFile* newFile = malloc(sizeof(t_openFile));
 
-    int index = 0;
+    index = 0;
     while(strcmp(recordsOfDir[index].name, nameOfFile) !=0 && index < 16){
         index ++;
     }
+
+
     if(index >=16){
         return ERROR;
     }
     else{
-        newFile->fileRecord = &(recordsOfDir[index]);
+        recordPos = index;
+        index = 0;
+        emptySpace = -1;
+         while(index < MAX_OPEN_FILES && emptySpace < 0) {
+            if(openedFiles[index].valid == false) {
+                emptySpace = index;
+            }
+            index++;
+
+        }
+
+        if(emptySpace < 0){
+            return ERROR;
+        }
+
+        newFile->fileRecord = &(recordsOfDir[recordPos]);
+        newFile->valid = true;
+        newFile->currentPointer =0;
+        getInodeToBeingWorkedInode(newFile->fileRecord->inodeNumber);
+        newFile->fileInode = beingWorkedInode;
     }
 
-    free(nameOfFile-1); //free memory with '/'
+
+
+    openedFiles[emptySpace] = *newFile;
+    return emptySpace;
+
 
 
 }
@@ -266,6 +289,9 @@ int read2 (FILE2 handle, char *buffer, int size) {
     //*Após a leitura, o contador de posição (current pointer) deve ser ajustado para o byte seguinte ao último lido.*
 
     //retorna SUCCESS (0) ou ERROR (-1)
+
+    struct openFile* = &(openedFiles[handle]);
+
 
     return SUCCESS;
 }
